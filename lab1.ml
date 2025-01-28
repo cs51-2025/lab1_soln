@@ -184,7 +184,7 @@ let exercise6b : string =
   in greet "World!";;
 
 (* If you were confused about what the `^` operator does, you'd have
-   found it in the Stdlib module described in the OCaml
+   found it in the `Stdlib` module described in the OCaml
    documentation online. *)
 
 let exercise6c : float -> float  =
@@ -215,7 +215,7 @@ before moving onto more complex problems.
 Exercise 7: Define a function `square` that squares its
 argument. We've provided a bit of template code, supplying the first
 line of the function definition but the body of the skeleton code just
-causes a failure by forcing an error using the built-in failwith
+causes a failure by forcing an error using the built-in `failwith`
 function. Edit the code to implement `square` properly.
 
 Test out your implementation of `square` by modifying the template
@@ -235,8 +235,8 @@ and running the test suite:
     % ocamlbuild -use-ocamlfind lab1_tests.byte
     % ./lab1_tests.byte
 
-You may want to add some tests for other functions in the lab to get
-some practice with automated unit testing.
+You should add some tests for other functions in the lab to get some
+practice with automated unit testing.
 ......................................................................*)
 
 let square (x : int) : int  =
@@ -246,7 +246,7 @@ let exercise7 =
   square 5 ;;
 
 (*......................................................................
-Exercise 8: Define a function, `exclaim`, that, given a string,
+Exercise 8: Define a function `exclaim`,that, given a string,
 "exclaims" it by capitalizing it and suffixing an exclamation mark.
 The `String.capitalize_ascii` function may be helpful here. For
 example, you should get the following behavior:
@@ -263,7 +263,7 @@ let exclaim (text : string) : string =
   (String.capitalize_ascii text) ^ "!" ;;
 
 (*......................................................................
-Exercise 9: Define a function, `small_bills`, that determines, given a
+Exercise 9: Define a function `needs_small_bills` that determines, given a
 price, if one will need a bill smaller than a 20 to pay for the
 item. For instance, a price of 100 can be paid for with 20s (and
 larger denominations) alone, but a price of 105 will require a bill
@@ -273,15 +273,15 @@ and (more realistically) that 50s, 100s, and larger denomination bills
 are not available, only 1s, 5s, 10s, and 20s. In addition, you may
 assume all prices given are non-negative.
 
-   # small_bills 105 ;;
+   # needs_small_bills 105 ;;
    - : bool = true
-   # small_bills 100 ;;
+   # needs_small_bills 100 ;;
    - : bool = false
-   # small_bills 150 ;;
+   # needs_small_bills 150 ;;
    - : bool = true
 ......................................................................*)
 
-let small_bills (price : int) : bool =
+let needs_small_bills (price : int) : bool =
   let cutoff_size = 20 in
   (price mod cutoff_size) <> 0 ;;
 
@@ -293,7 +293,7 @@ let small_bills (price : int) : bool =
    it is sufficient to note that you should be using the *structural*
    equality operators: `=` for equality and `<>` for inequality. These
    differ from the operators in C and Python (which use `==` and
-   `!=`), which are used as the physical equality operators in OCaml.
+   `!=`); these are used as the physical equality operators in OCaml.
 
    We also labeled 20 our `cutoff_size`. It is generally good practice
    to name special numbers used in code. If used many times, they
@@ -582,7 +582,7 @@ Part 5: Utilizing recursion
 ........................................................................
 Exercise 13: The factorial function takes the product of an integer
 and all the integers below it. It is generally notated as !. For
-example, 4! = 4 * 3 * 2 * 1. Write a function, `factorial`, that
+example, 4! = 4 * 3 * 2 * 1. Write a function `factorial` that
 calculates the factorial of its integer argument. Note: the factorial
 function is generally only defined on non-negative integers (0, 1, 2,
 3, ...). For the purpose of this exercise, you may assume all inputs
@@ -600,7 +600,7 @@ let rec factorial (x : int) =
   if x = 0 then 1
   else x * factorial (x - 1) ;;
 
-  (* The above code is what we expected people to produce.  However,
+  (* The above code is what we expected people to produce. However,
      this code will run forever when the input is negative. Better
      practice would be to raise an error, as below, when we encounter
      an invalid input. You'll learn more about this issue in Lab 4.
@@ -660,7 +660,7 @@ let rec sum_from_zero (x : int) : int =
    In this exercise, we were explicitly looking for this recursive
    solution. However, there's a closed-form solution for the sum, the
    one that Gauss himself used (see Figure 14.6 in Chapter 14 of the
-   textbook), that we can use to generate the following non-recursive
+   textbook), which we can use to generate the following non-recursive
    version.
 
     let sum_from_zero (x : int) : int =
