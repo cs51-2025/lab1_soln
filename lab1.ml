@@ -159,7 +159,7 @@ you'd like.
 ......................................................................*)
 
 (* SOLUTION: We need to use an operator that, unlike `+` and `*`, is
-   not associative. Examples include `-` and `/.` For instance,
+   not associative. Examples include `-` and `/`. For instance,
 
    # (3 - 2) - 1 ;;
    - : int = 0
@@ -344,7 +344,7 @@ that:
       let m = (a + 11 * h + 22 * l) / 451 in
       (h + l - 7 * m + 114) / 31 ;;
 
-   and then just made a copy and modify it to form the `computus_day`
+   and then just made a copy and modified it to form the `computus_day`
    function:
 
     let computus_day (year : int) : int =
@@ -364,7 +364,8 @@ that:
 
    However, the first twelve equations are shared between the
    computations for the month and the day, so it makes sense to split
-   this common part out as its own function: *)
+   this common part out as its own function (an application of the
+   edict of irredundancy): *)
 
 let computus_common (year : int) : int =
   let a = year mod 19 in
@@ -390,16 +391,17 @@ let computus_month (year : int) : int =
 let computus_day (year : int) =
   (computus_common year) mod 31 + 1 ;;
 
-(* Even more redundancy can be eliminated in the computation by taking
-   advantage of structured data, coming up in the next lab. You might
-   note that many of the equations come in pairs -- b and c, d and e,
-   i and k, and even the final two calculations of the month and year
-   -- with one of the equations a division (`x / y`), and the other
-   the remainder of that division (`x mod y`). By defining a function
-   to calculate both of these values, and returning them as a pair, we
-   can eliminate this redundancy, and reduce the possibility that a
-   change to one of the pairs doesn't get reflected in the
-   other. That's an application of the edict of irredundacy.
+  (* Even more redundancy can be eliminated in the computation by taking
+   advantage of structured data, a topic that is coming up in the next
+   lab. You might note that many of the equations come in pairs -- `b`
+   and `c`, `d` and `e`, `i` and `k`, and even the final two
+   calculations of the month and year -- with one of the equations a
+   division (`x / y`), and the other the remainder of that division
+   (`x mod y`). By defining a function to calculate both of these
+   values, and returning them as a pair, we can eliminate this
+   redundancy, and reduce the possibility that a change to one of the
+   pairs doesn't get reflected in the other. That's another
+   application of the edict of irredundacy.
 
     let divmod (x : int) (y : int) : int * int =
       x / y, x mod y ;;
@@ -439,7 +441,7 @@ let computus_day (year : int) =
       let november = (32 + 2 * may + 2 * september - august - october) mod 7 in
       let december = (january + 11 * august + 22 * november) / 451 in
       (august + november - 7 * december + 114) / 31 ;;
- *)
+   *)
 
 (*======================================================================
 Part 4: Code review
@@ -564,7 +566,7 @@ the header line given at <https://url.cs51.io/frustrum>.
    In the end, the code review process converges on the following: *)
 
 (* frustrum_volume radius1 radius2 height -- Returns the volume of a
-   conical frustrum given the radii of the two faces ( `radius1` and
+   conical frustrum given the radii of the two faces (`radius1` and
    `radius2`) and the perpendicular `height` *)
 
 let frustrum_volume (radius1 : float)
@@ -606,7 +608,7 @@ let rec factorial (x : int) =
      an invalid input. You'll learn more about this issue in Lab 4.
 
      let rec factorial (x : int) =
-        if x < 0 then raise (Invalid_argument "input must be non-negative")
+        if x < 0 then raise (Invalid_argument "fact: arg must be non-negative")
         else if x = 0 then 1
         else x * factorial (x - 1) ;;
    *)
